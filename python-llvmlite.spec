@@ -28,7 +28,7 @@ License:        BSD-2-Clause AND LicenseRef-Fedora-Public-Domain
 
 URL:            http://llvmlite.pydata.org/
 %global forgeurl https://github.com/numba/llvmlite
-Source0:        %{forgeurl}/archive/v%{version}/llvmlite-%{version}.tar.gz
+Source:         %{forgeurl}/archive/v%{version}/llvmlite-%{version}.tar.gz
 
 BuildRequires:  python3-devel
 
