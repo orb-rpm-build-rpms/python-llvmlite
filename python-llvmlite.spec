@@ -6,7 +6,7 @@
 %bcond doc_pdf 1
 
 Name:           python-llvmlite
-Version:        0.41.0
+Version:        0.41.1
 Release:        %{autorelease}
 Summary:        Lightweight LLVM Python binding for writing JIT compilers
 
