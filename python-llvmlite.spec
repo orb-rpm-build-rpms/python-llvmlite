@@ -36,6 +36,7 @@ URL:            http://llvmlite.pydata.org/
 Source:         %{forgeurl}/archive/v%{version}/llvmlite-%{version}.tar.gz
 
 BuildRequires:  python3-devel
+BuildRequires:  python3-pytest
 
 # 0.41.0-0.42.0 only support llvm14
 BuildRequires:  llvm14-devel
@@ -108,7 +109,7 @@ export LLVM_CONFIG="%{_libdir}/llvm14/bin/llvm-config"
 
 %check
 %if %{with tests}
-%{py3_test_envvars} %{python3} runtests.py
+%{pytest} -vv llvmlite/tests
 %endif
 
 %files -n python3-llvmlite -f %{pyproject_files}
