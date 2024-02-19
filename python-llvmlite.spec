@@ -109,6 +109,18 @@ export LLVM_CONFIG="%{_libdir}/llvm14/bin/llvm-config"
 
 %check
 %if %{with tests}
+%ifarch riscv64
+# Disable JIT tests on riscv64 since that feature is not supported
+# upstream yet.  See:
+# https://github.com/numba/llvmlite/issues/923
+# https://github.com/felixonmars/archriscv-packages/blob/master/python-llvmlite/riscv64.patch
+export PYTEST_ADDOPTS="\
+	--deselect llvmlite/tests/test_binding.py::TestMCJit \
+	--deselect llvmlite/tests/test_binding.py::TestGlobalConstructors \
+	--deselect llvmlite/tests/test_binding.py::TestObjectFile::test_add_object_file \
+	--deselect llvmlite/tests/test_binding.py::TestOrcLLJIT \
+	--deselect llvmlite/tests/test_binding.py::TestDylib::test_bad_library"
+%endif
 %{pytest} -vv llvmlite/tests
 %endif
 
