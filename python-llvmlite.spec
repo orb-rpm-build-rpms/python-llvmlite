@@ -5,8 +5,17 @@
 # We can generate PDF documentation as a substitute.
 %bcond doc_pdf 1
 
+# While upstream now supports LLVM 15 on an “experimental” basis, sympy FTBFS
+# when we build with LLVM 15.
+%if 0%{?fedora} && 0%{?fedora} < 41
+%global llvm_compat 14
+%else
+# Still technically “experimental”:
+%global llvm_compat 15
+%endif
+
 Name:           python-llvmlite
-Version:        0.42.0
+Version:        0.43.0
 Release:        %{autorelease}
 Summary:        Lightweight LLVM Python binding for writing JIT compilers
 
@@ -38,8 +47,7 @@ Source:         %{forgeurl}/archive/v%{version}/llvmlite-%{version}.tar.gz
 BuildRequires:  python3-devel
 BuildRequires:  python3-pytest
 
-# 0.41.0-0.42.0 only support llvm14
-BuildRequires:  llvm14-devel
+BuildRequires:  llvm%{llvm_compat}-devel
 BuildRequires:  gcc-c++
 
 %global _description %{expand:
@@ -95,7 +103,7 @@ echo 'intersphinx_mapping.clear()' >> docs/source/conf.py
 %pyproject_buildrequires %{?with_doc_pdf:docs/rtd-requirements.txt}
 
 %build
-export LLVM_CONFIG="%{_libdir}/llvm14/bin/llvm-config"
+export LLVM_CONFIG="%{_libdir}/llvm%{llvm_compat}/bin/llvm-config"
 %pyproject_wheel
 
 %if %{with doc_pdf}
