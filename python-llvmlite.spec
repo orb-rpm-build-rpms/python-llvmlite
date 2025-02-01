@@ -123,11 +123,11 @@ export LLVM_CONFIG="%{_libdir}/llvm%{llvm_compat}/bin/llvm-config"
 # https://github.com/numba/llvmlite/issues/923
 # https://github.com/felixonmars/archriscv-packages/blob/master/python-llvmlite/riscv64.patch
 export PYTEST_ADDOPTS="\
-	--deselect llvmlite/tests/test_binding.py::TestMCJit \
-	--deselect llvmlite/tests/test_binding.py::TestGlobalConstructors \
-	--deselect llvmlite/tests/test_binding.py::TestObjectFile::test_add_object_file \
-	--deselect llvmlite/tests/test_binding.py::TestOrcLLJIT \
-	--deselect llvmlite/tests/test_binding.py::TestDylib::test_bad_library"
+        --deselect llvmlite/tests/test_binding.py::TestMCJit \
+        --deselect llvmlite/tests/test_binding.py::TestGlobalConstructors \
+        --deselect llvmlite/tests/test_binding.py::TestObjectFile::test_add_object_file \
+        --deselect llvmlite/tests/test_binding.py::TestOrcLLJIT \
+        --deselect llvmlite/tests/test_binding.py::TestDylib::test_bad_library"
 %endif
 %{pytest} -vv llvmlite/tests
 %endif
