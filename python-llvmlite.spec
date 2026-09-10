@@ -8,7 +8,7 @@
 %global llvm_compat 20
 
 Name:           python-llvmlite
-Version:        0.47.0~rc1
+Version:        0.47.0
 %global srcversion %(echo '%{version}' | tr -d '~')
 Release:        %{autorelease}
 Summary:        Lightweight LLVM Python binding for writing JIT compilers
